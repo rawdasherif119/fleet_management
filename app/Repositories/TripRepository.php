@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Enums\BusSeats;
 use App\Models\Trip;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -21,24 +20,12 @@ class TripRepository extends BaseRepository
     /**
      * Get Available Trips Between Cities
      */
-    public function getAvailableTrips($data): Collection
+    public function tripsContainStartAndEndCities($data): Collection
     {
-        $trips = $this->model->tripsContainStartAndEndCities($data['start_city_id'], $data['end_city_id'])->get();
-        if ($trips->isNotEmpty()) {
-            foreach ($trips as $trip) {
-                $trip['start_order'] = $trip->stations()->where('start_city_id', $data['start_city_id'])->first()->order;
-                $trip['end_order']   = $trip->stations()->where('end_city_id', $data['end_city_id'])->first()->order;
-                $seats               = $trip->reservations->unique('seat');
-                if ($seats->count() < Trip::BUS_SEATS) {
-                    $trip['availableSeats'] = array_diff(BusSeats::getValues(), $seats->pluck('seat')->toArray());
-                } else {
-                    $trip['availableSeats'] = $trip->reserved_seats->countBy()->reject(function ($value) {
-                        return $value != 1;
-                    })->keys();
-                }
-            }
-        }
-        return $trips;
+        return $this->model->tripsContainStartAndEndCities(
+            $data['start_city_id'], $data['end_city_id']
+        )->get();
+
     }
 
 }

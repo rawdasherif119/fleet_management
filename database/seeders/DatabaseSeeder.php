@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\TripsSeeder;
 use Database\Seeders\CitiesSeeder;
+use Database\Seeders\StationsSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CitiesSeeder::class,
+            TripsSeeder::class,
+            StationsSeeder::class
         ]);
-
     }
 }

@@ -3,11 +3,9 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\BaseRepositoryInterface;
-use App\Traits\ManageFiles;
 
 class BaseService
 {
-    use ManageFiles;
 
     protected $repo;
 

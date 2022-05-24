@@ -24,14 +24,17 @@ class TripsSeeder extends Seeder
         $cairoId = City::whereName('Cairo')->first()->id;
         return [
             1 => [
+                'name'          => 'cairo|asyut',
                 'start_city_id' => $cairoId,
                 'end_city_id'   => City::whereName('Asyut')->first()->id,
             ],
             2 => [
+                'name'          => 'tanta|suhag',
                 'start_city_id' => City::whereName('Tanta')->first()->id,
                 'end_city_id'   => City::whereName('Sohag')->first()->id,
             ],
             3 => [
+                'name'          => 'matruh|cairo',
                 'start_city_id' => City::whereName('Marsa Matruh')->first()->id,
                 'end_city_id'   => $cairoId,
             ],

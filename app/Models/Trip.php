@@ -2,18 +2,21 @@
 
 namespace App\Models;
 
-use App\Models\Station;
 use App\Models\Reservation;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Station;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Trip extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['start_city_id', 'end_city_id'];
+    protected $fillable = ['start_city_id', 'end_city_id', 'name'];
+
+    const BUS_SEATS = 12;
 
     /**
      *--------------------------------------------------------------------------
@@ -43,6 +46,16 @@ class Trip extends Model
     public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class, 'trip_id');
+    }
+
+    /***************************************************************************** */
+
+    public function scopeTripsContainStartAndEndCities($query, $startCityId, $endCityId): Builder
+    {
+        return $query->whereHas('stations', function ($query) use ($startCityId, $endCityId) {
+            $query->where('start_city_id', $startCityId)
+                ->orWhere('end_city_id', $endCityId);
+        });
     }
 
 }

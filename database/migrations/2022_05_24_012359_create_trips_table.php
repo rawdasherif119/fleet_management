@@ -15,6 +15,7 @@ class CreateTripsTable extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->foreignId('start_city_id')->constrained('cities');
             $table->foreignId('end_city_id')->constrained('cities');
             $table->timestamps();

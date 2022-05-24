@@ -17,3 +17,12 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/register', 'AuthController@register')->name('api.register');
     Route::post('/login', 'AuthController@login')->name('api.login');
 });
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::group(['prefix' => 'trips'], function () {
+        Route::get('available', 'TripController@getAvailableTrips');
+    });
+    Route::group(['prefix' => 'reservations'], function () {
+        Route::post('/', 'ReservationController@store');
+    });
+});

@@ -30,7 +30,7 @@ class TripRepository extends BaseRepository
                 $trip['availableSeats'] = array_diff(BusSeats::getValues(), $seats->pluck('seat')->toArray());
             } else {
                 $trip['start_order']    = $trip->stations()->where('start_city_id', $data['start_city_id'])->first()->order;
-                $trip['availableSeats'] = $trip->reservations()->where('end_order', '<', $trip['start_order'])->pluck('seat')->countBy()->reject(function ($value) {
+                $trip['availableSeats'] = $trip->reserved_seats->countBy()->reject(function ($value) {
                     return $value != 1;
                 })->keys();
             }

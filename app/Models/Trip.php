@@ -18,6 +18,12 @@ class Trip extends Model
 
     const BUS_SEATS = 12;
 
+
+    public function getReservedSeatsAttribute()
+    {
+        return $this->reservations()->where('end_order', '<', $this->start_order)->pluck('seat');
+    }
+
     /**
      *--------------------------------------------------------------------------
      * Model Relations

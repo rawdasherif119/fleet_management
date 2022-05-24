@@ -33,9 +33,12 @@ php artisan db:seed
 
 9- Register User and login api are found in the postman collection 
 Or you can use this user directly without register (olso exist as example in collection)
-
+```sh
 email:rawdaTest@gmail.com 
+```
+```sh
 password:12345678:
+```
 
 10- Postman Collection: [Postman Collection](https://documenter.getpostman.com/view/18668876/UyxqD3rK).
 ***

@@ -60,7 +60,7 @@ class Trip extends Model
     {
         return $query->whereHas('stations', function ($query) use ($startCityId, $endCityId) {
             $query->where('start_city_id', $startCityId)
-                ->orWhere('end_city_id', $endCityId);
+                ->where('end_city_id', $endCityId);
         });
     }
 

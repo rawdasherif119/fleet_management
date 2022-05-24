@@ -9,10 +9,8 @@ class CitiesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $cities = $this->getEgyptCities();
         foreach ($cities as $city) {
@@ -20,7 +18,7 @@ class CitiesSeeder extends Seeder
         }
     }
 
-    public function getEgyptCities()
+    public function getEgyptCities(): array
     {
         return [
             'Cairo',

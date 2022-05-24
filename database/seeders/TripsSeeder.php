@@ -10,10 +10,8 @@ class TripsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $trips = $this->getTrips();
         foreach ($trips as $trip) {
@@ -21,7 +19,7 @@ class TripsSeeder extends Seeder
         }
     }
 
-    public function getTrips()
+    public function getTrips(): array
     {
         $cairoId = City::whereName('Cairo')->first()->id;
         return [
